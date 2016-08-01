@@ -56,7 +56,7 @@ class PocketGuard extends PluginBase implements Listener {
             return true;
         }
         switch (strtolower($command->getName())) {
-            case "pg":
+            case "chest":
                 $option = strtolower(array_shift($args));
                 switch ($option) {
                     case "lock":
@@ -69,7 +69,7 @@ class PocketGuard extends PluginBase implements Listener {
                     case "passlock":
                     case "passunlock":
                         if (is_null($passcode = array_shift($args))) {
-                            $sender->sendMessage("Usage: /pg passlock <passcode>");
+                            $sender->sendMessage("Usage: /chest passlock <passcode>");
                             return true;
                         }
                         $this->queue[$sender->getName()] = [$option, $passcode];
@@ -77,23 +77,23 @@ class PocketGuard extends PluginBase implements Listener {
 
                     case "share":
                         if (is_null($target = array_shift($args))) {
-                            $sender->sendMessage("Usage: /pg share <player>");
+                            $sender->sendMessage("Usage: /chest share <player>");
                             return true;
                         }
                         $this->queue[$sender->getName()] = [$option, $target];
                         break;
 
                     default:
-                        $sender->sendMessage("/pg $option dose not exist!");
-                        $sender->sendMessage("/pg <lock | unlock | public | info>");
-                        $sender->sendMessage("/pg <passlock | passunlock | share>");
+                        $sender->sendMessage("/chest $option dose not exist!");
+                        $sender->sendMessage("/chest <lock | unlock | public | info>");
+                        $sender->sendMessage("/chest <passlock | passunlock | share>");
                         return true;
                 }
                 $this->pocketGuardLogger->log("[" . $sender->getName() . "] Action:Command Command:" . $command->getName() . " Args:" . implode(",", $args));
                 $sender->sendMessage("[" .$option."] Touch the target chest!");
                 return true;
 
-            case "spg":
+            case "chest":
                 $option = strtolower(array_shift($args));
                 switch ($option) {
                     case "unlock":
@@ -110,7 +110,7 @@ class PocketGuard extends PluginBase implements Listener {
                                 $target = array_shift($args);
                                 if (is_null($target)) {
                                     $sender->sendMessage("Specify target player!");
-                                    $sender->sendMessage("/spg unlock player <player>");
+                                    $sender->sendMessage("/chest unlock player <player>");
                                     return true;
                                 }
                                 $this->databaseManager->deletePlayerData($target);
@@ -118,15 +118,15 @@ class PocketGuard extends PluginBase implements Listener {
                                 break;
 
                             default:
-                                $sender->sendMessage("/pg unlock $unlockOption dose not exist!");
-                                $sender->sendMessage("/spg unlock <all | player>");
+                                $sender->sendMessage("/chest unlock $unlockOption dose not exist!");
+                                $sender->sendMessage("/chest unlock <all | player>");
                                 return true;
                         }
                         break;
                       
                     default:
-                        $sender->sendMessage("/spg $option dose not exist!");
-                        $sender->sendMessage("/spg <unlock>");
+                        $sender->sendMessage("/chest $option dose not exist!");
+                        $sender->sendMessage("/chest <unlock>");
                         return true;
                 }
                 $this->pocketGuardLogger->log("[" . $sender->getName() . "] Action:Command Command:" . $command->getName() . " Args:" . implode(",", $args));
@@ -149,7 +149,7 @@ class PocketGuard extends PluginBase implements Listener {
                 $event->getPlayer()->sendMessage("Completed to unlock");
             } elseif ($attribute !== self::NOT_LOCKED and $owner !== $event->getPlayer()->getName() and !$event->getPlayer()->hasPermission("pocketguard.op")) {
                 $event->getPlayer()->sendMessage("The chest has been locked");
-                $event->getPlayer()->sendMessage("Try \"/pg info\" out to get more info about the chest");
+                $event->getPlayer()->sendMessage("Try \"/chest info\" out to get more info about the chest");
                 $this->pocketGuardLogger->log("[" . $event->getPlayer()->getName() . "] Action:Unlock Level:{$chest->getLevel()->getName()} Coordinate:{$chest->x},{$chest->y},{$chest->z}");
                 $event->setCancelled();
             }
@@ -276,7 +276,7 @@ class PocketGuard extends PluginBase implements Listener {
                 unset($this->queue[$event->getPlayer()->getName()]);
             } elseif($attribute !== self::NOT_LOCKED and $attribute !== self::PUBLIC_LOCK and $owner !== $event->getPlayer()->getName() and !$event->getPlayer()->hasPermission("pocketguard.op")) {
                 $event->getPlayer()->sendMessage("The chest has been locked");
-                $event->getPlayer()->sendMessage("Try \"/pg info\" to get more info about the chest");
+                $event->getPlayer()->sendMessage("Try \"/chest info\" to get more info about the chest");
                 $event->setCancelled();
             }
         }
