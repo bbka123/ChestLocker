@@ -1,6 +1,6 @@
-# PocketGuard
+# ChestLocker
 
-PocketGuard guards your chest against thieves.
+ChestLocker protects your chest from theft.
 
 # Installation
 1.  Drop it into your /plugins folder.
@@ -11,30 +11,19 @@ PocketGuard guards your chest against thieves.
 1. Type a command
 2. Touch target chest
 
-# Console and OP Player commands
-
-- permission: pocketguard.command.spg
-
-| Command | Parameter | Description |
-| :-----: | :-------: | :---------: |
-| /spg unlock all | `None` | Unlock all chests |
-| /spg unlock a | `None` | Alias of /spg unlock all |
-| /spg unlock player | `<username>` | Unlock all `<username>`'s chests |
-| /spg unlock p | `<username>` | Alias of /spg unlock player `<username>` |
-
 
 # Chat commands
 
-- permission: pocketguard.command.pg
+- permission: pocketguard.command.chest
 
 | Command | Parameter | Description |
 | :-----: | :-------: | :---------: |
-| /pg lock | `None` | Lock target chest |
-| /pg unlock | `None` | Unlock target chest |
-| /pg passlock | `<passcode>` | Lock target chest by passcode |
-| /pg passunlock | `<passcode>` | Unlock target chest by passcode. |
-| /pg public | `None` | Make target chest public |
-| /pg info | `None` | Investigate target chest |
+| /chest lock | `None` | Lock target chest |
+| /chest unlock | `None` | Unlock target chest |
+| /chest passlock | `<passcode>` | Lock target chest by passcode |
+| /chest passunlock | `<passcode>` | Unlock target chest by passcode. |
+| /chest public | `None` | Make target chest public |
+| /chest info | `None` | Investigate target chest |
 
 # Tips
 
